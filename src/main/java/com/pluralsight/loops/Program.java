@@ -45,15 +45,91 @@ public class Program {
         //Add for loop to search through list of persons
         //Check to see if the name matches user input
         //If so , print name
-        for(Person person : people) {
-            if(person.getFirstName().equals(name)) {
-                System.out.println(person.getFirstName() + " " + person.getLastName());
-            } else {
-                System.out.println("Enter name again");
+        for (Person person : people) {
+            if (person.getFirstName().equals(name)) {
+                System.out.println("Matching name: "
+                        + person.getFirstName() + " "
+                        + person.getLastName());
+            } else if (person.getLastName().equals(name)) {
+                System.out.println("Matching name: "
+                        + person.getLastName() + " "
+                        + person.getFirstName() + "\n");
             }
         }
 
 
+        //Run average age method
+        Program program = new Program();
+        program.averageAge(people);
+        System.out.println();
+
+        //Run oldestAge method
+        program.oldestAge(people);
+        System.out.println();
+
+        //Run youngestAge method
+        program.youngestAge(people);
+        System.out.println();
+
+
+    }
+
+    public void averageAge(List<Person> people) {
+
+        //Set toal age variable
+        int totalAge = 0;
+
+        //Add for loop to sort through people
+        for (Person person : people) {
+            totalAge += person.getAge();
+        }
+
+        //Add formula
+        double averageAge = (double) totalAge / people.size();
+
+        System.out.println("Average age of people: " + averageAge);
+    }
+
+    public void oldestAge(List<Person> people) {
+
+        //Set maxAge variable to people list
+        int maxAge = people.get(0).getAge();
+
+        //Initialize oldest person
+        Person oldestPerson = people.get(0);
+
+        //Add for loop to sort through the people
+        for (Person person : people) {
+            if (person.getAge() > maxAge) {
+                maxAge = person.getAge();
+                oldestPerson = person;
+            }
+        }
+
+        System.out.println("Oldest Person: "
+                + oldestPerson.getFirstName() + " "
+                + oldestPerson.getLastName() + " "
+                + oldestPerson.getAge());
+    }
+
+    public void youngestAge(List<Person> people) {
+
+        int minAge = people.get(0).getAge();
+
+        Person youngestPerson = people.get(0);
+
+        //Add for loop to sort through people
+        for(Person person : people){
+            if(person.getAge() < minAge){
+                minAge = person.getAge();
+                youngestPerson = person;
+            }
+        }
+
+        System.out.println("Youngest Person: "
+        + youngestPerson.getFirstName() + " "
+        + youngestPerson.getLastName() + " "
+        + youngestPerson.getAge());
 
     }
 }
